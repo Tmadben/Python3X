@@ -36,13 +36,18 @@ def saveFormShow():
     lbClasse.grid(row = 6, column = 0, sticky = W, pady = 2)
 
     # Add entry
-    enFirstName = Entry(saveForm, textvariable=varFirstName)
-    enFirstName.grid(row = 1, column = 1, sticky = W, pady = 2)
-    enLastName = Entry(saveForm, textvariable=varLastName)
-    enLastName.grid(row = 2, column = 1, sticky = W, pady = 2)
-    enAge = Entry(saveForm, textvariable=varAge)
-    enAge.grid(row = 3, column = 1, sticky = W, pady = 2)
-    
+    enFirstName = Entry(saveForm, textvariable=varFirstName, width=40)
+    enFirstName.grid(row = 1, column = 1, columnspan=2, sticky = W, pady = 2)
+    enLastName = Entry(saveForm, textvariable=varLastName, width=40)
+    enLastName.grid(row = 2, column = 1, columnspan=2, sticky = W, pady = 2)
+    enAge = Entry(saveForm, textvariable=varAge, width=10)
+    enAge.grid(row = 3, column = 1, columnspan=2, sticky = W, pady = 2)
+    rbSexeM = Radiobutton(saveForm, text="M", variable=varSexe, value="Masculin")
+    rbSexeM.grid(row = 4, column = 1, sticky = W, pady = 2)
+    rbSexeF = Radiobutton(saveForm, text="F", variable=varSexe, value="Feminin")
+    rbSexeF.grid(row = 4, column = 2, sticky = W, pady = 2)
+
+
 
     saveForm.title("ENREGISTRER UN ETUDIANT")
     saveForm.grab_set() #Set a form as modal
