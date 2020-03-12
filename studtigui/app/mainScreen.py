@@ -1,12 +1,13 @@
 # import tkinter module 
 from tkinter import * 
 import tkinter as tk
+from tkinter import ttk
 
 
 ## The main Screen
 master = Tk()
 
-#Gloabl Variables
+#Global Variables
 varFirstName = StringVar()
 varLastName = StringVar()
 varAge = int()
@@ -17,7 +18,7 @@ varPhone = StringVar()
 varEmail = StringVar()
 
 
-## All the form for saving, listing, editing, deleting students
+## Save student Form: ENREGISTREMENT D'UN ETUDIANT
 def saveFormShow():
     saveForm = tk.Toplevel(master)
 
@@ -35,7 +36,7 @@ def saveFormShow():
     lbClasse = Label(saveForm, text = "CLASSE : ")
     lbClasse.grid(row = 6, column = 0, sticky = W, pady = 2)
 
-    # Add entry
+    # Add all the entry
     enFirstName = Entry(saveForm, textvariable=varFirstName, width=40)
     enFirstName.grid(row = 1, column = 1, columnspan=2, sticky = W, pady = 2)
     enLastName = Entry(saveForm, textvariable=varLastName, width=40)
@@ -46,11 +47,21 @@ def saveFormShow():
     rbSexeM.grid(row = 4, column = 1, sticky = W, pady = 2)
     rbSexeF = Radiobutton(saveForm, text="F", variable=varSexe, value="Feminin")
     rbSexeF.grid(row = 4, column = 2, sticky = W, pady = 2)
-
-
+    cbNationality = ttk.Combobox(saveForm, values=["France","Cote D'Ivoire","Mali","Burkina Faso", "USA", "Canada"], width=37)
+    cbNationality.grid(row = 5, column=1, columnspan=2, sticky = W, pady = 2)
+    cbClasse = ttk.Combobox(saveForm, values=["IT RESEAUX","IC RESEAUX","IT GENIE LOGICIEL","IC GENIE LOGICIEL", "IT FINANCE", "IC FINANCE"], width=37)
+    cbClasse.grid(row = 6, column=1, columnspan=2, sticky = W, pady = 2)
+    
+    # Add Buttons Save and erase
+    btAnnuler = ttk.Button(saveForm, text="Annuler", command="")
+    btAnnuler.grid(row = 8, column = 1, sticky = W, pady = 2)
+    btSave = ttk.Button(saveForm, text="Valider", command="")
+    btSave.grid(row = 8, column = 2, sticky = W, pady = 2)
 
     saveForm.title("ENREGISTRER UN ETUDIANT")
     saveForm.grab_set() #Set a form as modal
+## End of SaveForm function
+
 
 
 def listStudentFormShow():
