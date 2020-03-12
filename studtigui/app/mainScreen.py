@@ -21,28 +21,29 @@ varEmail = StringVar()
 def saveFormShow():
     saveForm = tk.Toplevel(master)
 
+    # Add all the Labels
     lbFirstName = Label(saveForm, text = "NOM : ")
     lbFirstName.grid(row = 1, column = 0, sticky = W, pady = 2)
-
     lbLastName = Label(saveForm, text = "PRENOM(S) : ")
     lbLastName.grid(row = 2, column = 0, sticky = W, pady = 2)
-
     lbAge = Label(saveForm, text = "AGE : ")
     lbAge.grid(row = 3, column = 0, sticky = W, pady = 2)
-    
     lbSexe = Label(saveForm, text = "SEXE : ")
     lbSexe.grid(row = 4, column = 0, sticky = W, pady = 2)
-
-    lbClasse = Label(saveForm, text = "CLASSE : ")
-    lbClasse.grid(row = 5, column = 0, sticky = W, pady = 2)
-
     lbNationality = Label(saveForm, text = "NATIONALITE : ")
-    lbNationality.grid(row = 6, column = 0, sticky = W, pady = 2)
+    lbNationality.grid(row = 5, column = 0, sticky = W, pady = 2)
+    lbClasse = Label(saveForm, text = "CLASSE : ")
+    lbClasse.grid(row = 6, column = 0, sticky = W, pady = 2)
 
-
+    # Add entry
+    enFirstName = Entry(saveForm, textvariable=varFirstName)
+    enFirstName.grid(row = 1, column = 1, sticky = W, pady = 2)
+    enLastName = Entry(saveForm, textvariable=varLastName)
+    enLastName.grid(row = 2, column = 1, sticky = W, pady = 2)
+    enAge = Entry(saveForm, textvariable=varAge)
+    enAge.grid(row = 3, column = 1, sticky = W, pady = 2)
     
 
-    
     saveForm.title("ENREGISTRER UN ETUDIANT")
     saveForm.grab_set() #Set a form as modal
 
