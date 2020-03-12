@@ -2,6 +2,8 @@
 from tkinter import * 
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
+
 
 
 ## The main Screen
@@ -55,12 +57,20 @@ def saveFormShow():
     # Add Buttons Save and erase
     btAnnuler = ttk.Button(saveForm, text="Annuler", command="")
     btAnnuler.grid(row = 8, column = 1, sticky = W, pady = 2)
-    btSave = ttk.Button(saveForm, text="Valider", command="")
+    btSave = ttk.Button(saveForm, text="Valider", command = saveStudent )
     btSave.grid(row = 8, column = 2, sticky = W, pady = 2)
 
+    
     saveForm.title("ENREGISTRER UN ETUDIANT")
     saveForm.grab_set() #Set a form as modal
+
 ## End of SaveForm function
+
+# Save a Student function
+def saveStudent():
+    messagebox.showinfo("Saving","Saved")
+
+    
 
 
 
