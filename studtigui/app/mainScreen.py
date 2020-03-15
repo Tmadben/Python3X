@@ -24,6 +24,7 @@ varClasse = StringVar()
 varNationality = StringVar()
 varPhone = StringVar()
 varEmail = StringVar()
+varRows = []
 
 
 #################################
@@ -35,10 +36,10 @@ def saveFormShow():
     saveForm = tk.Toplevel(master)
 
     # Add all the Labels
-    lbFirstName = Label(saveForm, text = "NOM : ")
-    lbFirstName.grid(row = 1, column = 0, sticky = W, pady = 2)
-    lbLastName = Label(saveForm, text = "PRENOM(S) : ")
-    lbLastName.grid(row = 2, column = 0, sticky = W, pady = 2)
+    lbLastName = Label(saveForm, text = "NOM : ")
+    lbLastName.grid(row = 1, column = 0, sticky = W, pady = 2)
+    lbFirstName = Label(saveForm, text = "PRENOM(S) : ")
+    lbFirstName.grid(row = 2, column = 0, sticky = W, pady = 2)
     lbAge = Label(saveForm, text = "AGE : ")
     lbAge.grid(row = 3, column = 0, sticky = W, pady = 2)
     lbSexe = Label(saveForm, text = "SEXE : ")
@@ -49,10 +50,10 @@ def saveFormShow():
     lbClasse.grid(row = 6, column = 0, sticky = W, pady = 2)
 
     # Add all the entry
-    enFirstName = Entry(saveForm, textvariable=varFirstName, width=40)
-    enFirstName.grid(row = 1, column = 1, columnspan=2, sticky = W, pady = 2)
     enLastName = Entry(saveForm, textvariable=varLastName, width=40)
-    enLastName.grid(row = 2, column = 1, columnspan=2, sticky = W, pady = 2)
+    enLastName.grid(row = 1, column = 1, columnspan=2, sticky = W, pady = 2)
+    enFirstName = Entry(saveForm, textvariable=varFirstName, width=40)
+    enFirstName.grid(row = 2, column = 1, columnspan=2, sticky = W, pady = 2)
     enAge = Entry(saveForm, textvariable=varAge, width=10)
     enAge.grid(row = 3, column = 1, columnspan=2, sticky = W, pady = 2)
     rbSexeM = Radiobutton(saveForm, text="M", variable=varSexe, value="Masculin")
@@ -77,11 +78,26 @@ def saveFormShow():
     
 
 
-
+# Students LISTING Form
 def listStudentFormShow():
+
     listStudentForm = tk.Toplevel(master)
+
+    cols = ("MATRICULE","NOM","PRENOM(S)","SEXE","AGE","PAYS","CLASSE")
+    tblStudents = ttk.Treeview(listStudentForm, columns=cols, show='headings')
+
+    # set column headings
+    for col in cols:
+        tblStudents.heading(col, text=col, anchor=CENTER)    
+
+    lbTitreList = Label(listStudentForm, text = "LISTING DES ETUDIANTS INSCRITS : ")
+    lbTitreList.grid(row = 0, column = 0, sticky = W+E, pady = 2)
+    #Fill the Tree View
+    findAllStudents(tblStudents)
+    tblStudents.grid(row=1, column=0)
     listStudentForm.title("LISTE DES ETUDIANTS")
     listStudentForm.grab_set()
+#End of LISTING
 
 def editStudentFormShow():
     editStudentForm = tk.Toplevel(master)
@@ -101,10 +117,10 @@ def deleteStudentFormShow():
 # Save a Student function
 def saveStudent():
 
-    cursor = conn.cursor()
+    cursorLocal = conn.cursor()
     reference = {'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
-    cursor.execute("""INSERT INTO students (firstname, lastname, age, sexe, nationality, classe) VALUES(%(firstname)s, %(lastname)s, %(age)s, %(sexe)s, %(nationality)s, %(classe)s)""", reference)
-    conn.close()
+    cursorLocal.execute("""INSERT INTO students (firstname, lastname, age, sexe, nationality, classe) VALUES(%(firstname)s, %(lastname)s, %(age)s, %(sexe)s, %(nationality)s, %(classe)s)""", reference)
+    cursorLocal.close()
 
     # Show Message after saving
     messagebox.showinfo("Enregistrement","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " enregistré avec succès!" )
@@ -127,7 +143,27 @@ def initSaveStudent():
     varAge.set(0)
     varNationality.set("")
     varClasse.set("")
-# End of init 
+# End of init
+
+
+# Function: Retrieve the list of all the students
+def findAllStudents(myTreeView):
+
+    dataRow = []
+    cursorLocal = conn.cursor()
+    # Opérations à réaliser sur la base ...
+    cursorLocal.execute("""SELECT matricule, lastname, firstname, sexe, age, nationality, classe FROM students;""")
+    resultCol = cursorLocal.fetchall()
+
+    for row in resultCol:
+        dataRow.append([row[0],row[1],row[2],row[3],row[4],row[5],row[6]])
+    
+    for (mat,lsn,fsn,sex,age,nat,cla) in dataRow:
+        myTreeView.insert("","end", values=(mat,lsn,fsn,sex,age,nat,cla))
+    
+    cursorLocal.close()
+#End of retrieve function
+
 
 
 
