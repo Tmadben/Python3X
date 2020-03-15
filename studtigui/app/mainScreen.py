@@ -5,17 +5,17 @@ from tkinter import ttk
 from tkinter import messagebox
 import mysql.connector
 
-## DB Connexion string
+## DB Connexion string : Chaine d accès à la base de données
 conn = mysql.connector.connect(host="127.0.0.1",
 user="root", password="",
 database="bd_student")
 
 
 
-## The main Screen
+## The main Screen: Ecran Principal contenant le menu
 master = Tk()
 
-#Global Variables
+#Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
 varFirstName = StringVar()
 varLastName = StringVar()
 varAge = IntVar()
@@ -29,6 +29,7 @@ varRows = []
 
 #################################
 # # # FORMS CREATION SPACCE # # #
+# # ESPACE POUR LES FENETRES # #
 #################################
 
 ## Save student Form: ENREGISTREMENT D'UN ETUDIANT
@@ -65,7 +66,7 @@ def saveFormShow():
     cbClasse = ttk.Combobox(saveForm, values=["IT RESEAUX","IC RESEAUX","IT GENIE LOGICIEL","IC GENIE LOGICIEL", "IT FINANCE", "IC FINANCE"], width=37, textvariable=varClasse)
     cbClasse.grid(row = 6, column=1, columnspan=2, sticky = W, pady = 2)
     
-    # Add Buttons Save and erase
+    # Add Buttons Valider and Annuler
     btAnnuler = ttk.Button(saveForm, text="Annuler", command = initSaveStudent)
     btAnnuler.grid(row = 8, column = 1, sticky = W, pady = 2)
     btSave = ttk.Button(saveForm, text="Valider", command = saveStudent )
@@ -83,35 +84,45 @@ def listStudentFormShow():
 
     listStudentForm = tk.Toplevel(master)
 
+    # Headings list creation : Liste pour les entêtes
     cols = ("MATRICULE","NOM","PRENOM(S)","SEXE","AGE","PAYS","CLASSE")
+    # TreeView Creation: Creation du tableau de listing
     tblStudents = ttk.Treeview(listStudentForm, columns=cols, show='headings')
 
-    # set column headings
+    # set column headings: Ajout des entêtes au tableau
     for col in cols:
         tblStudents.heading(col, text=col, anchor=CENTER)    
 
+    #Form Title : Titre de la fenêtre de listing
     lbTitreList = Label(listStudentForm, text = "LISTING DES ETUDIANTS INSCRITS : ")
     lbTitreList.grid(row = 0, column = 0, sticky = W+E, pady = 2)
-    #Fill the Tree View
+    
+    #Fill the Tree View with function findAllStudents() : Remplissage du tableau avec la fonction findAllStudents
     findAllStudents(tblStudents)
+
     tblStudents.grid(row=1, column=0)
     listStudentForm.title("LISTE DES ETUDIANTS")
     listStudentForm.grab_set()
 #End of LISTING
 
+# Form for Editing a student : Fenetre de modification 
 def editStudentFormShow():
     editStudentForm = tk.Toplevel(master)
     editStudentForm.title("MODIFIER LES INFOS D'UN ETUDIANT")
     editStudentForm.grab_set()
+#End of Editing form
 
+#Form for deleting a student : Fenetre de suppression
 def deleteStudentFormShow():
     deleteStudentForm = tk.Toplevel(master)
     deleteStudentForm.title("SUPPRIMER UN ETUDIANT")
     deleteStudentForm.grab_set()
+#End of deleting form
 
 
 ############################################
 # # # DATA PROCESSING FUNCTIONS SPACE # # #
+#  ESPACE DEDIE AU TRAITEMENT DES DONNEES #
 ############################################  
 
 # Save a Student function
@@ -170,6 +181,7 @@ def findAllStudents(myTreeView):
 
 #############################
 # # # MAIN SCREEN SPACE # # #
+# # #  MENU PRINCIPAL   # # #
 #############################
   
 
