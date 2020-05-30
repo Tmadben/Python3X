@@ -7,7 +7,7 @@ import mysql.connector
 
 ## DB Connexion string : Chaine d accès à la base de données
 conn = mysql.connector.connect(host="127.0.0.1",
-user="root", password="",
+user="root", password="root",
 database="bd_student")
 
 
@@ -87,11 +87,11 @@ def listStudentFormShow():
     # Headings list creation : Liste pour les entêtes
     cols = ("MATRICULE","NOM","PRENOM(S)","SEXE","AGE","PAYS","CLASSE")
     # TreeView Creation: Creation du tableau de listing
-    tblStudents = ttk.Treeview(listStudentForm, columns=cols, show='headings')
+    tblStudents = ttk.Treeview(listStudentForm, columns=cols, show='headings', selectmode="browse")
 
     # set column headings: Ajout des entêtes au tableau
     for col in cols:
-        tblStudents.heading(col, text=col, anchor=CENTER)    
+        tblStudents.heading(col, text=col, anchor="center")    
 
     #Form Title : Titre de la fenêtre de listing
     lbTitreList = Label(listStudentForm, text = "LISTING DES ETUDIANTS INSCRITS : ")
@@ -99,6 +99,7 @@ def listStudentFormShow():
     
     #Fill the Tree View with function findAllStudents() : Remplissage du tableau avec la fonction findAllStudents
     findAllStudents(tblStudents)
+    tblStudents.bind("<ButtonRelease-1>", lambda event, t=tblStudents: getSelectedRow(t))
 
     tblStudents.grid(row=1, column=0)
     listStudentForm.title("LISTE DES ETUDIANTS")
@@ -171,10 +172,15 @@ def findAllStudents(myTreeView):
     
     for (mat,lsn,fsn,sex,age,nat,cla) in dataRow:
         myTreeView.insert("","end", values=(mat,lsn,fsn,sex,age,nat,cla))
+        
     
     cursorLocal.close()
 #End of retrieve function
 
+# Function: Retrieve the details of the selected row
+def getSelectedRow(myTreeView):
+    selectedRow = myTreeView.item(myTreeView.focus())["values"]
+    print (selectedRow)
 
 
 
