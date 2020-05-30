@@ -30,13 +30,15 @@ btOpenSaveForm.grid(row = 1, column = 0)
 
 ## To edit the existing tarifs
 btOpenListForm = Button(master, text = "Tarifs associés", height=1, width=25, command='')
-btOpenListForm.grid(row = 2, column = 0)
+btOpenListForm.grid(row = 1, column = 1)
 
 ## Shut down the app
 btQuit = Button(master, text = "Quitter", height=1, width=25, command=master.quit)
-btQuit.grid(row = 5, column = 0)
+btQuit.grid(row = 1, column = 2)
 
 
 ##Open The main Screen 
 master.title("GESTION PARCKING TDKT -  MENU PRINCIPAL")
+master.geometry("550x400")
+master.resizable(0, 0) 
 mainloop() 
