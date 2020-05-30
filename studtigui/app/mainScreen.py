@@ -157,20 +157,6 @@ def listStudentFormShow():
     listStudentForm.grab_set()
 #End of LISTING
 
-# Form for Editing a student : Fenetre de modification 
-def editStudentFormShow():
-    editStudentForm = tk.Toplevel(master)
-    editStudentForm.title("MODIFIER LES INFOS D'UN ETUDIANT")
-    editStudentForm.grab_set()
-#End of Editing form
-
-#Form for deleting a student : Fenetre de suppression
-def deleteStudentFormShow():
-    deleteStudentForm = tk.Toplevel(master)
-    deleteStudentForm.title("SUPPRIMER UN ETUDIANT")
-    deleteStudentForm.grab_set()
-#End of deleting form
-
 
 ############################################
 # # # DATA PROCESSING FUNCTIONS SPACE # # #
@@ -304,14 +290,6 @@ btOpenSaveForm.grid(row = 1, column = 0)
 ## List all the students form
 btOpenListForm = Button(master, text = "Afficher", height=1, width=25, command=listStudentFormShow)
 btOpenListForm.grid(row = 2, column = 0)
-
-## Edit a student form
-btEditStudentForm = Button(master, text = "Modifier", height=1, width=25, command=editStudentFormShow)
-btEditStudentForm.grid(row = 3, column = 0)
-
-## Delete a student form
-btDeleteStudentForm = Button(master, text = "Supprimer",height=1, width=25, command=deleteStudentFormShow)
-btDeleteStudentForm.grid(row = 4, column = 0)
 
 ## Shut down the app
 btQuit = Button(master, text = "Quitter", height=1, width=25, command=master.quit)
