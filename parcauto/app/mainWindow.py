@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from PIL import ImageTk, Image
-from datetime import date
+from datetime import *
 import mysql.connector
 
 ## DB Connexion string : Chaine d accès à la base de données
@@ -19,11 +19,37 @@ master = Tk()
 
 #Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
 varNumTicket = StringVar()
-varDatArr = date()
-varDatDep = date()
+varDatArr = StringVar()
+varDatDep = StringVar()
 varTarifId = IntVar()
 varTarifName = StringVar()
 varTarifPrice = IntVar()
+
+
+############################################
+# # # DATA PROCESSING FUNCTIONS SPACE # # #
+#  ESPACE DEDIE AU TRAITEMENT DES DONNEES #
+############################################ 
+def newTicket():
+    cursorLocal = conn.cursor()
+    cursorLocal.execute("SELECT * FROM tbl_enregistrements")
+    numberOfRow = cursorLocal.rowcount
+    if numberOfRow < 0 :
+        numberOfRow = 1
+    else:
+        numberOfRow = numberOfRow + 1
+
+    now = datetime.now()
+    year = '{:02d}'.format(now.year)
+    month = '{:02d}'.format(now.month)
+    day = '{:02d}'.format(now.day)
+    hour = '{:02d}'.format(now.hour)
+    minute = '{:02d}'.format(now.minute)
+    second = '{:02d}'.format(now.second)
+    varNumTicket.set(year + '-' + month + '-TDKT' + '-' + '{:08d}'.format(numberOfRow))
+    dateFormat = '{}-{}-{} {}:{}:{}'.format(year, month, day, hour, minute, second)
+    varDatArr.set(dateFormat)
+    cursorLocal.close
 
 
 
@@ -34,17 +60,29 @@ varTarifPrice = IntVar()
 
 def generateTicketFormShow():
     ticketForm = tk.Toplevel(master)
+    
+    
+     # Add all the Labels
+    lbNumTicket = Label(ticketForm, text = "N° Ticket : ")
+    lbNumTicket.grid(row = 1, column = 0, sticky = W, pady = 2)
+    lbDateArrivee = Label(ticketForm, text = "Date Arrivée : ")
+    lbDateArrivee.grid(row = 2, column = 0, sticky = W, pady = 2)
+    lbTarif = Label(ticketForm, text = "Tarif associé : ")
+    lbTarif.grid(row = 3, column = 0, sticky = W, pady = 2)
 
+    # Add all the entry
+    enNumTicket = Entry(ticketForm, textvariable=varNumTicket, width=22)
+    enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2)
+    enDateArrivee = Entry(ticketForm, textvariable=varDatArr, width=22)
+    enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2)
+    cbTarifPrice = ttk.Combobox(ticketForm, values=[500,1000,1500], width=10, textvariable=varTarifPrice)
+    cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2)
 
     ticketForm.title("TICKET NUMERIQUE")
-    ticketForm.geometry("280x380")
+    ticketForm.geometry("280x150")
     ticketForm.resizable(0, 0) 
     ticketForm.grab_set()
-
-
-
-
-
+    newTicket()
 
 
 
