@@ -179,58 +179,63 @@ def deleteStudentFormShow():
 
 # Save a Student function
 def saveStudent():
+    if varFirstName.get() != '' and varLastName.get() != '' and varAge.get() !='' and varSexe.get() != '' and varNationality.get() !='' and varClasse.get() != '':
+        cursorLocal = conn.cursor()
+        reference = {'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+        cursorLocal.execute("""INSERT INTO students (firstname, lastname, age, sexe, nationality, classe) VALUES(%(firstname)s, %(lastname)s, %(age)s, %(sexe)s, %(nationality)s, %(classe)s)""", reference)
+        cursorLocal.close()
 
-    cursorLocal = conn.cursor()
-    reference = {'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
-    cursorLocal.execute("""INSERT INTO students (firstname, lastname, age, sexe, nationality, classe) VALUES(%(firstname)s, %(lastname)s, %(age)s, %(sexe)s, %(nationality)s, %(classe)s)""", reference)
-    cursorLocal.close()
-
-    # Show Message after saving
-    messagebox.showinfo("Enregistrement","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " enregistré avec succès!" )
-    
-    #Initialise all the fields
-    initSaveStudent()
+        # Show Message after saving
+        messagebox.showinfo("Enregistrement","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " enregistré avec succès!" )
+        
+        #Initialise all the fields
+        initSaveStudent()
+    else:
+        messagebox.showinfo("Enregistrement","Enregistrement impossible, champs vides!" )
 # End function Save student
 
 
 # Edit a Student function
 def editStudent():
 
-    cursorLocal = conn.cursor()
-    reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
-    cursorLocal.execute("""
-    UPDATE students 
-    SET firstname = %(firstname)s,
-    lastname = %(lastname)s,
-    age = %(age)s,
-    sexe =  %(sexe)s,
-    nationality = %(nationality)s,
-    classe =   %(classe)s 
-    WHERE matricule = %(matricule)s""", reference)
-    cursorLocal.close()
+    if varFirstName.get() != '' and varLastName.get() != '' and varAge.get() !='' and varSexe.get() != '' and varNationality.get() !='' and varClasse.get() != '':
+        cursorLocal = conn.cursor()
+        reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+        cursorLocal.execute("""
+        UPDATE students 
+        SET firstname = %(firstname)s,
+        lastname = %(lastname)s,
+        age = %(age)s,
+        sexe =  %(sexe)s,
+        nationality = %(nationality)s,
+        classe =   %(classe)s 
+        WHERE matricule = %(matricule)s""", reference)
+        cursorLocal.close()
 
 
-    # Show Message after saving
-    messagebox.showinfo("Modification","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " modifié avec succès!" )
-    initSaveStudent()
-
+        # Show Message after saving
+        messagebox.showinfo("Modification","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " modifié avec succès!" )
+        initSaveStudent()
+    else:
+        messagebox.showinfo("Modification","Modification impossible, champs vides!" )
 # End function Edit student
 
 
 def deleteStudent():
+    if varFirstName.get() != '' and varLastName.get() != '' and varAge.get() !='' and varSexe.get() != '' and varNationality.get() !='' and varClasse.get() != '':
+        cursorLocal = conn.cursor()
+        reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+        cursorLocal.execute("""
+        DELETE FROM students 
+        WHERE matricule = %(matricule)s""", reference)
+        cursorLocal.close()
 
-    cursorLocal = conn.cursor()
-    reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
-    cursorLocal.execute("""
-    DELETE FROM students 
-    WHERE matricule = %(matricule)s""", reference)
-    cursorLocal.close()
 
-
-    # Show Message after saving
-    messagebox.showinfo("Suppression","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " supprimé avec succès!" )
-    initSaveStudent()
-    
+        # Show Message after saving
+        messagebox.showinfo("Suppression","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " supprimé avec succès!" )
+        initSaveStudent()
+    else :
+        messagebox.showinfo("Suppression","Supression impossible, champs vides!" )
 
 # End function Edit student
 
