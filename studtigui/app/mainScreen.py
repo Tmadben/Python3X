@@ -40,7 +40,7 @@ varRows = []
 ## Save student Form: ENREGISTREMENT D'UN ETUDIANT
 def saveFormShow():
     saveForm = tk.Toplevel(master)
-
+    initSaveStudent()
     # Add all the Labels
     lbLastName = Label(saveForm, text = "NOM : ")
     lbLastName.grid(row = 1, column = 0, sticky = W, pady = 2)
@@ -119,13 +119,11 @@ def editFormShow():
     cbClasse = ttk.Combobox(editForm, values=["IT RESEAUX","IC RESEAUX","IT GENIE LOGICIEL","IC GENIE LOGICIEL", "IT FINANCE", "IC FINANCE"], width=37, textvariable=varClasse)
     cbClasse.grid(row = 6, column=1, columnspan=2, sticky = W, pady = 2)
     
-    # Add Buttons Valider and Annuler
-    btAnnuler = ttk.Button(editForm, text="Annuler", command = initSaveStudent)
-    btAnnuler.grid(row = 8, column = 1, sticky = W, pady = 2)
-    btSave = ttk.Button(editForm, text="Valider",  command = editStudent)
-    btSave.grid(row = 8, column = 2, sticky = W, pady = 2)
-    btdelete = ttk.Button(editForm, text="Supprimer", command =  '')
-    btdelete.grid(row = 8, column = 3, sticky = W, pady = 2)
+    # Add Buttons Modifier and Supprimer
+    btSave = ttk.Button(editForm, text="Modifier",  command = editStudent)
+    btSave.grid(row = 8, column = 1, sticky = W, pady = 2)
+    btdelete = ttk.Button(editForm, text="Supprimer", command =  deleteStudent)
+    btdelete.grid(row = 8, column = 2, sticky = W, pady = 2)
     
     editForm.title("MODIFIER UN ETUDIANT")
     editForm.grab_set() #Set a form as modal
@@ -191,11 +189,7 @@ def saveStudent():
     messagebox.showinfo("Enregistrement","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " enregistré avec succès!" )
     
     #Initialise all the fields
-    varFirstName.set("")
-    varLastName.set("")
-    varAge.set(0)
-    varNationality.set("")
-    varClasse.set("")
+    initSaveStudent()
 # End function Save student
 
 
@@ -203,7 +197,7 @@ def saveStudent():
 def editStudent():
 
     cursorLocal = conn.cursor()
-    reference = {'matricule': varNumReq.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+    reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
     cursorLocal.execute("""
     UPDATE students 
     SET firstname = %(firstname)s,
@@ -215,8 +209,27 @@ def editStudent():
     WHERE matricule = %(matricule)s""", reference)
     cursorLocal.close()
 
+
     # Show Message after saving
     messagebox.showinfo("Modification","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " modifié avec succès!" )
+    initSaveStudent()
+
+# End function Edit student
+
+
+def deleteStudent():
+
+    cursorLocal = conn.cursor()
+    reference = {'matricule': varNum.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+    cursorLocal.execute("""
+    DELETE FROM students 
+    WHERE matricule = %(matricule)s""", reference)
+    cursorLocal.close()
+
+
+    # Show Message after saving
+    messagebox.showinfo("Suppression","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " supprimé avec succès!" )
+    initSaveStudent()
     
 
 # End function Edit student
@@ -226,11 +239,11 @@ def editStudent():
 def initSaveStudent():
 
     #Initialise all the fields
-    varFirstName.set("")
-    varLastName.set("")
-    varAge.set(0)
-    varNationality.set("")
-    varClasse.set("")
+    varFirstName.set('')
+    varLastName.set('')
+    varAge.set('')
+    varNationality.set('')
+    varClasse.set('')
 # End of init
 
 
@@ -265,6 +278,7 @@ def getSelectedRow(myTreeView):
     varNationality.set(selectedRow[5])
     varClasse.set(selectedRow[6])
     editFormShow()
+    
     
     
 
