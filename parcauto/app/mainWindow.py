@@ -72,17 +72,17 @@ def generateTicketFormShow():
 
     # Add all the entry
     enNumTicket = Entry(ticketForm, textvariable=varNumTicket, width=22)
-    enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2)
+    enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2, padx = 10)
     enDateArrivee = Entry(ticketForm, textvariable=varDatArr, width=22)
-    enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2)
+    enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
     cbTarifPrice = ttk.Combobox(ticketForm, values=[500,1000,1500], width=10, textvariable=varTarifPrice)
-    cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2)
+    cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2, padx = 10)
     btSave = ttk.Button(ticketForm, text="Enregistrer", command = '' )
     btSave.config(width = 35)
-    btSave.grid(row = 4, column = 0, columnspan=3, sticky = W, pady = 2)
+    btSave.grid(row = 4, column = 0, columnspan=3, sticky = W, pady = 2, padx = 10)
 
-    ticketForm.title("TICKET NUMERIQUE")
-    ticketForm.geometry("280x150")
+    ticketForm.title("TDKT - TICKET")
+    ticketForm.geometry("260x150")
     ticketForm.resizable(0, 0) 
     ticketForm.grab_set()
     newTicket()
