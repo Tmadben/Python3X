@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 from PIL import ImageTk, Image
+from datetime import date
 import mysql.connector
 
 ## DB Connexion string : Chaine d accès à la base de données
@@ -15,6 +16,15 @@ database="parcauto_db")
 
 ## The main Screen: Ecran Principal contenant le menu
 master = Tk()
+
+#Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
+varNumTicket = StringVar()
+varDatArr = date()
+varDatDep = date()
+varTarifId = IntVar()
+varTarifName = StringVar()
+varTarifPrice = IntVar()
+
 
 
 #################################
