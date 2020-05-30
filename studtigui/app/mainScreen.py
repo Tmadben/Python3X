@@ -16,6 +16,8 @@ database="bd_student")
 master = Tk()
 
 #Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
+varNum = IntVar()
+varNumReq = IntVar()
 varFirstName = StringVar()
 varLastName = StringVar()
 varAge = IntVar()
@@ -25,6 +27,9 @@ varNationality = StringVar()
 varPhone = StringVar()
 varEmail = StringVar()
 varRows = []
+
+
+
 
 
 #################################
@@ -77,6 +82,54 @@ def saveFormShow():
     saveForm.grab_set() #Set a form as modal
 ## End of SaveForm function
     
+
+
+## Save student Form: ENREGISTREMENT D'UN ETUDIANT
+def editFormShow():
+
+    editForm = tk.Toplevel(master)    
+
+    # Add all the Labels
+    lbLastName = Label(editForm, text = "NOM : ")
+    lbLastName.grid(row = 1, column = 0, sticky = W, pady = 2)
+    lbFirstName = Label(editForm, text = "PRENOM(S) : ")
+    lbFirstName.grid(row = 2, column = 0, sticky = W, pady = 2)
+    lbAge = Label(editForm, text = "AGE : ")
+    lbAge.grid(row = 3, column = 0, sticky = W, pady = 2)
+    lbSexe = Label(editForm, text = "SEXE : ")
+    lbSexe.grid(row = 4, column = 0, sticky = W, pady = 2)
+    lbNationality = Label(editForm, text = "NATIONALITE : ")
+    lbNationality.grid(row = 5, column = 0, sticky = W, pady = 2)
+    lbClasse = Label(editForm, text = "CLASSE : ")
+    lbClasse.grid(row = 6, column = 0, sticky = W, pady = 2)
+
+    # Add all the entry
+    enLastName = Entry(editForm, textvariable=varLastName, width=40)
+    enLastName.grid(row = 1, column = 1, columnspan=2, sticky = W, pady = 2)
+    enFirstName = Entry(editForm, textvariable=varFirstName, width=40)
+    enFirstName.grid(row = 2, column = 1, columnspan=2, sticky = W, pady = 2)
+    enAge = Entry(editForm, textvariable=varAge, width=10)
+    enAge.grid(row = 3, column = 1, columnspan=2, sticky = W, pady = 2)
+    rbSexeM = Radiobutton(editForm, text="M", variable=varSexe, value="Masculin")
+    rbSexeM.grid(row = 4, column = 1, sticky = W, pady = 2)
+    rbSexeF = Radiobutton(editForm, text="F", variable=varSexe, value="Feminin")
+    rbSexeF.grid(row = 4, column = 2, sticky = W, pady = 2)
+    cbNationality = ttk.Combobox(editForm, values=["France","Cote D'Ivoire","Mali","Burkina Faso", "USA", "Canada"], width=37, textvariable=varNationality)
+    cbNationality.grid(row = 5, column=1, columnspan=2, sticky = W, pady = 2)
+    cbClasse = ttk.Combobox(editForm, values=["IT RESEAUX","IC RESEAUX","IT GENIE LOGICIEL","IC GENIE LOGICIEL", "IT FINANCE", "IC FINANCE"], width=37, textvariable=varClasse)
+    cbClasse.grid(row = 6, column=1, columnspan=2, sticky = W, pady = 2)
+    
+    # Add Buttons Valider and Annuler
+    btAnnuler = ttk.Button(editForm, text="Annuler", command = initSaveStudent)
+    btAnnuler.grid(row = 8, column = 1, sticky = W, pady = 2)
+    btSave = ttk.Button(editForm, text="Valider",  command = editStudent)
+    btSave.grid(row = 8, column = 2, sticky = W, pady = 2)
+    btdelete = ttk.Button(editForm, text="Supprimer", command =  '')
+    btdelete.grid(row = 8, column = 3, sticky = W, pady = 2)
+    
+    editForm.title("MODIFIER UN ETUDIANT")
+    editForm.grab_set() #Set a form as modal
+## End of EditForm function
 
 
 # Students LISTING Form
@@ -146,6 +199,29 @@ def saveStudent():
 # End function Save student
 
 
+# Edit a Student function
+def editStudent():
+
+    cursorLocal = conn.cursor()
+    reference = {'matricule': varNumReq.get(), 'firstname': varFirstName.get(), 'lastname' : varLastName.get(), 'age' : varAge.get(), 'sexe' : varSexe.get(), 'nationality' : varNationality.get(), 'classe' : varClasse.get()}
+    cursorLocal.execute("""
+    UPDATE students 
+    SET firstname = %(firstname)s,
+    lastname = %(lastname)s,
+    age = %(age)s,
+    sexe =  %(sexe)s,
+    nationality = %(nationality)s,
+    classe =   %(classe)s 
+    WHERE matricule = %(matricule)s""", reference)
+    cursorLocal.close()
+
+    # Show Message after saving
+    messagebox.showinfo("Modification","Etudiant: " + varFirstName.get() + " " + varLastName.get() + " modifié avec succès!" )
+    
+
+# End function Edit student
+
+
 # Initialise student saving form
 def initSaveStudent():
 
@@ -180,7 +256,17 @@ def findAllStudents(myTreeView):
 # Function: Retrieve the details of the selected row
 def getSelectedRow(myTreeView):
     selectedRow = myTreeView.item(myTreeView.focus())["values"]
-    print (selectedRow)
+    varNumReq.set(selectedRow[0])
+    varNum.set(selectedRow[0])
+    varLastName.set(selectedRow[1])
+    varFirstName.set(selectedRow[2])
+    varSexe.set(selectedRow[3])
+    varAge.set(selectedRow[4])
+    varNationality.set(selectedRow[5])
+    varClasse.set(selectedRow[6])
+    editFormShow()
+    
+    
 
 
 
