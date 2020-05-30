@@ -77,6 +77,9 @@ def generateTicketFormShow():
     enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2)
     cbTarifPrice = ttk.Combobox(ticketForm, values=[500,1000,1500], width=10, textvariable=varTarifPrice)
     cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2)
+    btSave = ttk.Button(ticketForm, text="Enregistrer", command = '' )
+    btSave.config(width = 35)
+    btSave.grid(row = 4, column = 0, columnspan=3, sticky = W, pady = 2)
 
     ticketForm.title("TICKET NUMERIQUE")
     ticketForm.geometry("280x150")
