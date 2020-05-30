@@ -1,0 +1,42 @@
+# import tkinter module 
+from tkinter import * 
+import tkinter as tk
+from tkinter import ttk
+from tkinter import messagebox
+import mysql.connector
+
+## DB Connexion string : Chaine d accès à la base de données
+conn = mysql.connector.connect(host="127.0.0.1",
+user="root", password="root",
+database="parcauto_db")
+
+
+
+## The main Screen: Ecran Principal contenant le menu
+master = Tk()
+
+
+
+#############################
+# # # MAIN SCREEN SPACE # # #
+# # #  MENU PRINCIPAL   # # #
+#############################
+  
+
+# button widget main menu
+## Save a student form
+btOpenSaveForm = Button(master, text = "Générer ticket", height=1, width=25, command='')
+btOpenSaveForm.grid(row = 1, column = 0)
+
+## List all the students form
+btOpenListForm = Button(master, text = "Tarifs associés", height=1, width=25, command='')
+btOpenListForm.grid(row = 2, column = 0)
+
+## Shut down the app
+btQuit = Button(master, text = "Quitter", height=1, width=25, command=master.quit)
+btQuit.grid(row = 5, column = 0)
+
+
+##Open The main Screen 
+master.title("PARCKING TDKT -  MENU PRINCIPAL")
+mainloop() 
