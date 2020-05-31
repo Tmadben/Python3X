@@ -11,6 +11,7 @@ import mysql.connector
 conn = mysql.connector.connect(host="127.0.0.1",
 user="root", password="root",
 database="parcauto_db")
+cursorLocal = conn.cursor(buffered=True)
 
 
 
@@ -35,15 +36,14 @@ varTarifTab = []
 ############################################
 
 def getTarifTab():
-    cursorLocal = conn.cursor()
+    varTarifTab.clear()
     cursorLocal.execute("SELECT * FROM tbl_tarifs")
     record = cursorLocal.fetchall()
     for row in record:
         varTarifTab.append([row[1],row[2]])   
-    cursorLocal.close
+    
 
 def newTicket():
-    cursorLocal = conn.cursor()
     cursorLocal.execute("SELECT * FROM tbl_enregistrements")
     numberOfRow = cursorLocal.rowcount
     if numberOfRow < 0 :
@@ -60,25 +60,27 @@ def newTicket():
     second = '{:02d}'.format(now.second)
     varNumTicket.set(year + '-' + month + '-TDKT' + '-' + '{:08d}'.format(numberOfRow))
     dateFormat = '{}-{}-{} {}:{}:{}'.format(year, month, day, hour, minute, second)
-    varDatArr.set(dateFormat)
-    cursorLocal.close
+    varDatArr.set(now.strftime('%Y-%m-%d %H:%M:%S'))
 
 def initTicket():
+
     varNumTicket.set('')
     varDatArr.set('')
     varMatricule.set('')
     varTarifId.set('')
 
-def saveEnregistrement():
-    if varNumTicket.get() != '' and varMatricule.get() != '' and varDatArr.get() !='' and varTarifName.get() != '' and varTarifPrice.get() !='':
-        cursorLocal = conn.cursor()
-        reference = {'numTicket': varNumTicket.get(), 'matricule': varMatricule.get(), 'timeArr' : varDatArr.get(), 'nomTarif' : varTarifName.get(), 'prixTarif' : varTarifPrice.get()}
-        cursorLocal.execute("""INSERT INTO tbl_enregistrements (numTicket, matricule, timeArr, nomTarif, prixTarif) VALUES(%(numTicket)s, %(matricule)s, %(timeArr)s, %(nomTarif)s, %(prixTarif)s)""", reference)
-        cursorLocal.close()
 
+
+def saveEnregistrement():
+
+    varTarifName.set(varTarif.get().split()[0])
+    varTarifPrice.set(varTarif.get().split()[1])
+    if varNumTicket.get() != '' and varMatricule.get() != '' and varDatArr.get() !='' and varTarifName.get() != '' and varTarifPrice.get() !='':
+        reference = {'numTicket': varNumTicket.get(), 'matricule': varMatricule.get(), 'timeArr' : varDatArr.get(), 'nomTarif' : varTarifName.get(), 'prixTarif' : varTarifPrice.get()}
+        cursorLocal.execute("""INSERT INTO tbl_enregistrements (num_ticket, num_vehicule, time_arri, nom_tarif, prix_tarif) VALUES(%(numTicket)s, %(matricule)s, %(timeArr)s, %(nomTarif)s, %(prixTarif)s)""", reference)
+        conn.commit()
         # Show Message after saving
         messagebox.showinfo("Enregistrement","Véhicule: N°" + varMatricule.get() + " Ticket N°" + varNumTicket.get() + " enregistré avec succès!" )
-        
         #Initialise all the fields
         initTicket()
     else:
