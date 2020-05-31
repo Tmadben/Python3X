@@ -59,7 +59,7 @@ def initTicket():
     varTarifId.set('')
 
 def saveEnregistrement():
-   if varNumTicket.get() != '' and varMatricule.get() != '' and varDatArr.get() !='' and varTarifName.get() != '' and varTarifPrice.get() !='' :
+    if varNumTicket.get() != '' and varMatricule.get() != '' and varDatArr.get() !='' and varTarifName.get() != '' and varTarifPrice.get() !='':
         cursorLocal = conn.cursor()
         reference = {'numTicket': varNumTicket.get(), 'matricule': varMatricule.get(), 'timeArr' : varDatArr.get(), 'nomTarif' : varTarifName.get(), 'prixTarif' : varTarifPrice.get()}
         cursorLocal.execute("""INSERT INTO tbl_enregistrements (numTicket, matricule, timeArr, nomTarif, prixTarif) VALUES(%(numTicket)s, %(matricule)s, %(timeArr)s, %(nomTarif)s, %(prixTarif)s)""", reference)
