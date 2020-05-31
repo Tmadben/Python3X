@@ -42,14 +42,14 @@ def findAllEnregistrements(myTreeView):
     dataRow = []
     dataRow.clear()
     # Opérations à réaliser sur la base ...
-    cursorLocal.execute("""SELECT num_vehicule, num_ticket, nom_tarif, time_arri, time_depa, duree, prix_tarif, montant FROM tbl_enregistrements;""")
+    cursorLocal.execute("""SELECT id, num_vehicule, num_ticket, nom_tarif, time_arri, time_depa, duree, prix_tarif, montant FROM tbl_enregistrements;""")
     resultCol = cursorLocal.fetchall()
 
     for row in resultCol:
-        dataRow.append([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]])
+        dataRow.append([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]])
     
-    for (veh,tic,nmt,tma,tmd,dur,pta,mtn) in dataRow:
-        myTreeView.insert("","end", values=(veh,tic,nmt,tma,tmd,dur,pta,mtn))
+    for (dd,veh,tic,nmt,tma,tmd,dur,pta,mtn) in dataRow:
+        myTreeView.insert("","end", values=(dd,veh,tic,nmt,tma,tmd,dur,pta,mtn))
 #End of retrieve function
 
 
@@ -111,24 +111,55 @@ def saveEnregistrement():
 # # ESPACE POUR LES FENETRES # #
 #################################
 
+# Function: Retrieve the details of the selected row
+def getSelectedRow(myTreeView):
+    messagebox
+
 def enregistrementsFormShow():
     enregistrementsForm = tk.Toplevel(master)
 
     # Add all the Labels
     lbNumTicket = Label(enregistrementsForm, text = "N° Ticket : ")
-    lbNumTicket.grid(row = 1, column = 0, sticky = W, pady = 2)
+    lbNumTicket.grid(row = 2, column = 0, sticky = W, pady = 2)
 
     # Add all the entry
     enNumTicket = Entry(enregistrementsForm, textvariable=varSearchTicket, width=22)
-    enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2, padx = 10)
+    enNumTicket.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
 
     # Add Button save
     btSave = ttk.Button(enregistrementsForm, text="Rechercher", command='')
     btSave.config(width = 10)
-    btSave.grid(row = 1, column = 2, sticky = W, pady = 2, padx = 10)
+    btSave.grid(row = 2, column = 2, sticky = W, pady = 2, padx = 10)
+
+     # Headings list creation : Liste pour les entêtes
+    cols = ("N°","MATRICULE","N°TICKET","TYPE TARIF","ARRIVEE","DEPART","DUREE", "PRIX UNIT","MONTANT")
+    # TreeView Creation: Creation du tableau de listing
+    tbl = ttk.Treeview(enregistrementsForm, columns=cols, show='headings', selectmode="browse")
+
+    # set column headings: Ajout des entêtes au tableau
+    for col in cols:
+        tbl.heading(col, text=col, anchor="center")    
+
+    
+    #Fill the Tree View with function findAllStudents() : Remplissage du tableau avec la fonction findAllStudents
+    findAllEnregistrements(tbl)
+
+    tbl.bind("<ButtonRelease-1>", lambda event, t=tbl: getSelectedRow(t))
+
+    tbl.column("N°", minwidth=0, width=40)
+    tbl.column("MATRICULE", minwidth=0, width=120)
+    tbl.column("N°TICKET", minwidth=0, width=160)
+    tbl.column("TYPE TARIF", minwidth=0, width=110)
+    tbl.column("ARRIVEE", minwidth=0, width=165)
+    tbl.column("DEPART", minwidth=0, width=165)
+    tbl.column("DUREE", minwidth=0, width=60)
+    tbl.column("PRIX UNIT", minwidth=0, width=90)
+    tbl.column("MONTANT", minwidth=0, width=120)
+    tbl.grid(row=1, column=0, columnspan=3, padx=5, pady=5)
+    
 
     enregistrementsForm.title("LISTE - ENREGISTREMENTS")
-    enregistrementsForm.geometry("750x400")
+    enregistrementsForm.geometry("1050x400")
     enregistrementsForm.resizable(0, 0) 
     enregistrementsForm.grab_set()
 
