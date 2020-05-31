@@ -36,6 +36,23 @@ varTarifTab = []
 #  ESPACE DEDIE AU TRAITEMENT DES DONNEES #
 ############################################
 
+# Function: Retrieve the list of all the enregistrements
+def findAllEnregistrements(myTreeView):
+
+    dataRow = []
+    dataRow.clear()
+    # Opérations à réaliser sur la base ...
+    cursorLocal.execute("""SELECT num_vehicule, num_ticket, nom_tarif, time_arri, time_depa, duree, prix_tarif, montant FROM tbl_enregistrements;""")
+    resultCol = cursorLocal.fetchall()
+
+    for row in resultCol:
+        dataRow.append([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7]])
+    
+    for (veh,tic,nmt,tma,tmd,dur,pta,mtn) in dataRow:
+        myTreeView.insert("","end", values=(veh,tic,nmt,tma,tmd,dur,pta,mtn))
+#End of retrieve function
+
+
 def getTarifTab():
     varTarifTab.clear()
     cursorLocal.execute("SELECT * FROM tbl_tarifs")
