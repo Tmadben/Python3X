@@ -20,6 +20,7 @@ master = Tk()
 
 #Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
 varNumTicket = StringVar()
+varSearchTicket = StringVar()
 varMatricule = StringVar()
 varDatArr = StringVar()
 varDatDep = StringVar()
@@ -95,6 +96,19 @@ def saveEnregistrement():
 
 def enregistrementsFormShow():
     enregistrementsForm = tk.Toplevel(master)
+
+    # Add all the Labels
+    lbNumTicket = Label(enregistrementsForm, text = "N° Ticket : ")
+    lbNumTicket.grid(row = 1, column = 0, sticky = W, pady = 2)
+
+    # Add all the entry
+    enNumTicket = Entry(enregistrementsForm, textvariable=varSearchTicket, width=22)
+    enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2, padx = 10)
+
+    # Add Button save
+    btSave = ttk.Button(enregistrementsForm, text="Rechercher", command='')
+    btSave.config(width = 10)
+    btSave.grid(row = 1, column = 2, sticky = W, pady = 2, padx = 10)
 
     enregistrementsForm.title("LISTE - ENREGISTREMENTS")
     enregistrementsForm.geometry("750x400")
