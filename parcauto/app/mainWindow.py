@@ -26,12 +26,22 @@ varTarifId = IntVar()
 varTarifName = StringVar()
 varTarif = StringVar()
 varTarifPrice = IntVar()
+varTarifTab = []
 
 
 ############################################
 # # # DATA PROCESSING FUNCTIONS SPACE # # #
 #  ESPACE DEDIE AU TRAITEMENT DES DONNEES #
-############################################ 
+############################################
+
+def getTarifTab():
+    cursorLocal = conn.cursor()
+    cursorLocal.execute("SELECT * FROM tbl_tarifs")
+    record = cursorLocal.fetchall()
+    for row in record:
+        varTarifTab.append([row[1],row[2]])   
+    cursorLocal.close
+
 def newTicket():
     cursorLocal = conn.cursor()
     cursorLocal.execute("SELECT * FROM tbl_enregistrements")
@@ -84,8 +94,10 @@ def saveEnregistrement():
 def generateTicketFormShow():
     ticketForm = tk.Toplevel(master)
     
+    #Init tarifs tab
+    getTarifTab()
     
-     # Add all the Labels
+    # Add all the Labels
     lbNumTicket = Label(ticketForm, text = "N° Ticket : ")
     lbNumTicket.grid(row = 1, column = 0, sticky = W, pady = 2)
     lbDateArrivee = Label(ticketForm, text = "Date Arrivée : ")
@@ -100,7 +112,7 @@ def generateTicketFormShow():
     enNumTicket.grid(row = 1, column = 1, sticky = W, pady = 2, padx = 10)
     enDateArrivee = Entry(ticketForm, textvariable=varDatArr, width=22)
     enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
-    cbTarif = ttk.Combobox(ticketForm, values=[["Tourisme ",500],["Camionnette ",1000],["Moto ",200]], width=10, textvariable=varTarif)
+    cbTarif = ttk.Combobox(ticketForm, values=varTarifTab, width=10, textvariable=varTarif)
     cbTarif.config(width=19)
     cbTarif.grid(row = 3, column=1, sticky = W, pady = 2, padx = 10)
     enNumMatricule = Entry(ticketForm, textvariable=varMatricule, width=22)
