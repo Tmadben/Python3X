@@ -73,6 +73,8 @@ def generateTicketFormShow():
     lbDateArrivee.grid(row = 2, column = 0, sticky = W, pady = 2)
     lbTarif = Label(ticketForm, text = "Tarif associé : ")
     lbTarif.grid(row = 3, column = 0, sticky = W, pady = 2)
+    lbMatricule = Label(ticketForm, text = "N° Matricule : ")
+    lbMatricule.grid(row = 4, column = 0, sticky = W, pady = 2)
 
     # Add all the entry
     enNumTicket = Entry(ticketForm, textvariable=varNumTicket, width=22)
@@ -81,9 +83,13 @@ def generateTicketFormShow():
     enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
     cbTarifPrice = ttk.Combobox(ticketForm, values=[500,1000,1500], width=10, textvariable=varTarifPrice)
     cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2, padx = 10)
+    enNumMatricule = Entry(ticketForm, textvariable=varMatricule, width=22)
+    enNumMatricule.grid(row = 4, column = 1, sticky = W, pady = 2, padx = 10)
+    
+    # Add Button save
     btSave = ttk.Button(ticketForm, text="Enregistrer", command=saveEnregistrement )
     btSave.config(width = 35)
-    btSave.grid(row = 4, column = 0, columnspan=3, sticky = W, pady = 2, padx = 10)
+    btSave.grid(row = 5, column = 0, columnspan=3, sticky = W, pady = 2, padx = 10)
 
     ticketForm.title("TDKT - TICKET")
     ticketForm.geometry("260x150")
