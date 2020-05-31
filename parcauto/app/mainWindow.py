@@ -52,10 +52,28 @@ def newTicket():
     varDatArr.set(dateFormat)
     cursorLocal.close
 
-
+def initTicket():
+    varNumTicket.set('')
+    varDatArr.set('')
+    varMatricule.set('')
+    varTarifId.set('')
 
 def saveEnregistrement():
-    messagebox.showinfo("Enregistrement","Enregistrement impossible, champs vides!" )
+   if varNumTicket.get() != '' and varMatricule.get() != '' and varDatArr.get() !='' and varTarifName.get() != '' and varTarifPrice.get() !='' :
+        cursorLocal = conn.cursor()
+        reference = {'numTicket': varNumTicket.get(), 'matricule': varMatricule.get(), 'timeArr' : varDatArr.get(), 'nomTarif' : varTarifName.get(), 'prixTarif' : varTarifPrice.get()}
+        cursorLocal.execute("""INSERT INTO tbl_enregistrements (numTicket, matricule, timeArr, nomTarif, prixTarif) VALUES(%(numTicket)s, %(matricule)s, %(timeArr)s, %(nomTarif)s, %(prixTarif)s)""", reference)
+        cursorLocal.close()
+
+        # Show Message after saving
+        messagebox.showinfo("Enregistrement","Véhicule: N°" + varMatricule.get() + " Ticket N°" + varNumTicket.get() + " enregistré avec succès!" )
+        
+        #Initialise all the fields
+        initTicket()
+    else:
+        messagebox.showinfo("Enregistrement","Enregistrement impossible, champs vides!" )
+# End function Save
+
 
 #################################
 # # # FORMS CREATION SPACCE # # #
