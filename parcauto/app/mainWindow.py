@@ -19,6 +19,7 @@ master = Tk()
 
 #Global Variables : variables globales utilisées pour les champs, liste déroulantes et cases à cocher
 varNumTicket = StringVar()
+varMatricule = StringVar()
 varDatArr = StringVar()
 varDatDep = StringVar()
 varTarifId = IntVar()
@@ -53,6 +54,9 @@ def newTicket():
 
 
 
+def saveEnregistrement():
+    messagebox.showinfo("Enregistrement","Enregistrement impossible, champs vides!" )
+
 #################################
 # # # FORMS CREATION SPACCE # # #
 # # ESPACE POUR LES FENETRES # #
@@ -77,7 +81,7 @@ def generateTicketFormShow():
     enDateArrivee.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
     cbTarifPrice = ttk.Combobox(ticketForm, values=[500,1000,1500], width=10, textvariable=varTarifPrice)
     cbTarifPrice.grid(row = 3, column=1, sticky = W, pady = 2, padx = 10)
-    btSave = ttk.Button(ticketForm, text="Enregistrer", command = '' )
+    btSave = ttk.Button(ticketForm, text="Enregistrer", command=saveEnregistrement )
     btSave.config(width = 35)
     btSave.grid(row = 4, column = 0, columnspan=3, sticky = W, pady = 2, padx = 10)
 
