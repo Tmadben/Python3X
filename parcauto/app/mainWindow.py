@@ -117,19 +117,26 @@ def getSelectedRow(myTreeView):
 
 def enregistrementsFormShow():
     enregistrementsForm = tk.Toplevel(master)
+    
+    # Add PanelWindow
+    pan = PanedWindow(enregistrementsForm, orient=HORIZONTAL)
+    pan.grid(row=1, column=0)
 
     # Add all the Labels
     lbNumTicket = Label(enregistrementsForm, text = "N° Ticket : ")
-    lbNumTicket.grid(row = 2, column = 0, sticky = W, pady = 2)
+    #lbNumTicket.grid(row = 2, column = 0, sticky = W, pady = 2)
+    pan.add(lbNumTicket)
 
     # Add all the entry
     enNumTicket = Entry(enregistrementsForm, textvariable=varSearchTicket, width=22)
-    enNumTicket.grid(row = 2, column = 1, sticky = W, pady = 2, padx = 10)
+    #enNumTicket.grid(row = 2, column = 0, sticky = W, pady = 2, padx = 10)
+    pan.add(enNumTicket)
 
     # Add Button save
     btSave = ttk.Button(enregistrementsForm, text="Rechercher", command='')
     btSave.config(width = 10)
-    btSave.grid(row = 2, column = 2, sticky = W, pady = 2, padx = 10)
+    #btSave.grid(row = 2, column = 0, sticky = W, pady = 2, padx = 10)
+    pan.add(btSave)
 
      # Headings list creation : Liste pour les entêtes
     cols = ("N°","MATRICULE","N°TICKET","TYPE TARIF","ARRIVEE","DEPART","DUREE", "PRIX UNIT","MONTANT")
@@ -155,7 +162,7 @@ def enregistrementsFormShow():
     tbl.column("DUREE", minwidth=0, width=60)
     tbl.column("PRIX UNIT", minwidth=0, width=90)
     tbl.column("MONTANT", minwidth=0, width=120)
-    tbl.grid(row=1, column=0, columnspan=3, padx=5, pady=5)
+    tbl.grid(row=2, column=0,  padx=5, pady=5)
     
 
     enregistrementsForm.title("LISTE - ENREGISTREMENTS")
