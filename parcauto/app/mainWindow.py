@@ -93,6 +93,15 @@ def saveEnregistrement():
 # # ESPACE POUR LES FENETRES # #
 #################################
 
+def enregistrementsFormShow():
+    enregistrementsForm = tk.Toplevel(master)
+
+    enregistrementsForm.title("LISTE - ENREGISTREMENTS")
+    enregistrementsForm.geometry("750x400")
+    enregistrementsForm.resizable(0, 0) 
+    enregistrementsForm.grab_set()
+
+
 def generateTicketFormShow():
     ticketForm = tk.Toplevel(master)
     
@@ -146,7 +155,7 @@ btOpenSaveForm = Button(master, text = "Générer ticket", height=1, width=25, c
 btOpenSaveForm.grid(row = 1, column = 0)
 
 ## Shut down the app
-btListenregistrement = Button(master, text = "Enregistrements", height=1, width=25, command='')
+btListenregistrement = Button(master, text = "Enregistrements", height=1, width=25, command=enregistrementsFormShow)
 btListenregistrement.grid(row = 1, column = 1)
 
 ## To edit the existing tarifs
