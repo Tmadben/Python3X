@@ -1,0 +1,12 @@
+LES ETAPES d'UTILISATION:
+
+1. A l'arrivée du véhicule, l'opérateur génére un ticket au N° automatique, puis indique le numéro de la plaque d'immatriculation du véhicule.
+2. L'operateur indique le tarif en fonction du type de vehicule et enregistre ensuite le ticket et le vehicule peut ainsi accéder au parking. 
+Le système enregistrera l'heure et la date d'entrée.
+4. Le ticket est remis au client (proprietaire du vehicule).
+3. A la sortie du vehicule, le client présentera le ticket à l'operateur. 
+4. l'operateur ouvrira l'ecran des enregistrements pour rechercher et selectionner le ticket (double clique sur la ligne sélectionnée).
+5. L'operateur procedera à la sortie, le système calculera le montant à payer par le client en utilisant le tarif et le temps écoulé
+par le véhicule dans le parking ((temps départ - temps arrivée) * tarif horraire).
+6. Le client reglera la note, et l'operateur lui remettra un ticket de sortie après validation du paiement.
+7.Le client pourra sortir son vehicule en utilisant son ticket de sortie.
