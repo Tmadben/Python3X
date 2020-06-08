@@ -35,6 +35,7 @@ varTarifTab = []
 # # # DATA PROCESSING FUNCTIONS SPACE # # #
 #  ESPACE DEDIE AU TRAITEMENT DES DONNEES #
 ############################################
+    
 
 # Function: Retrieve the list of all the enregistrements
 def findAllEnregistrements(myTreeView):
@@ -115,7 +116,9 @@ def saveEnregistrement():
 def getSelectedRow(myTreeView):
     messagebox
 
+
 def enregistrementsFormShow():
+    
     enregistrementsForm = tk.Toplevel(master)
     
     # Add PanelWindow
@@ -128,20 +131,15 @@ def enregistrementsFormShow():
     pan.add(lbNumTicket)
 
     # Add all the entry
-    enNumTicket = Entry(enregistrementsForm, textvariable=varSearchTicket, width=22)
+    enNumTicket = Entry(enregistrementsForm, textvariable=varSearchTicket, width=25)
     #enNumTicket.grid(row = 2, column = 0, sticky = W, pady = 2, padx = 10)
     pan.add(enNumTicket)
-
-    # Add Button save
-    btSave = ttk.Button(enregistrementsForm, text="Rechercher", command='')
-    btSave.config(width = 10)
-    #btSave.grid(row = 2, column = 0, sticky = W, pady = 2, padx = 10)
-    pan.add(btSave)
 
      # Headings list creation : Liste pour les entêtes
     cols = ("N°","MATRICULE","N°TICKET","TYPE TARIF","ARRIVEE","DEPART","DUREE", "PRIX UNIT","MONTANT")
     # TreeView Creation: Creation du tableau de listing
     tbl = ttk.Treeview(enregistrementsForm, columns=cols, show='headings', selectmode="browse")
+    
 
     # set column headings: Ajout des entêtes au tableau
     for col in cols:
@@ -163,6 +161,13 @@ def enregistrementsFormShow():
     tbl.column("PRIX UNIT", minwidth=0, width=90)
     tbl.column("MONTANT", minwidth=0, width=120)
     tbl.grid(row=2, column=0,  padx=5, pady=5)
+
+
+    # Add Button save
+    btSave = ttk.Button(enregistrementsForm, text="Rechercher", command='')
+    btSave.config(width = 10)
+    #btSave.grid(row = 2, column = 0, sticky = W, pady = 2, padx = 10)
+    pan.add(btSave)
     
 
     enregistrementsForm.title("LISTE - ENREGISTREMENTS")
@@ -170,6 +175,7 @@ def enregistrementsFormShow():
     enregistrementsForm.resizable(0, 0) 
     enregistrementsForm.grab_set()
 
+    
 
 def generateTicketFormShow():
     ticketForm = tk.Toplevel(master)
