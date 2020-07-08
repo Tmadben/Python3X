@@ -29,7 +29,7 @@ def headerTitle():
 
 def introAnalya():
     time.sleep(6)
-    print("\tJe suis Analya, une Intelligence Artificelle,")
+    print("\tJe suis Analya, une Intelligence Artificielle,")
     time.sleep(4)
     print("\tqui vous assistera pour votre diagnostique.")
     print("\n")
@@ -37,6 +37,9 @@ def introAnalya():
     print("\tMaintenant que vous savez qui je suis, loll,")
     time.sleep(5)
     print("\tje vais vous aider à vous présenter, Ok?")
+    print("\n")
+    time.sleep(3)
+    print("\tAllez, on y va!")
     print("\n")
 
 def salutation():
