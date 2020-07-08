@@ -27,11 +27,16 @@ def headerTitle():
     print("\n")
     
 
-def infoDemographique():
-    time.sleep(3)
+def introAnalya():
+    time.sleep(6)
     print("\tJe suis Analya, une Intelligence Artificelle,")
-    time.sleep(3)
+    time.sleep(4)
     print("\tqui vous assistera pour votre diagnostique.")
+    print("\n")
+    time.sleep(4)
+    print("\tMaintenant que vous savez qui je suis, loll,")
+    time.sleep(5)
+    print("\tje vais vous aider à vous présenter, Ok?")
     print("\n")
 
 def salutation():
@@ -45,5 +50,5 @@ def salutation():
 
 headerTitle()
 
-infoDemographique()
+introAnalya()
 salutation()
