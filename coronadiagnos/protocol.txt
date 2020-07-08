@@ -1,0 +1,35 @@
+**************************** I - Niveau d'exposition des 15 derniers jours *************************
+    1) Avez vous été en contact avec un malade ==> 60
+    2) Avez vous été dans un pays avec plus de 1000 cas ==> 30
+    3) Avez vous été en contact avec quelqu'un qui a été exposé ==> 10
+
+    Résultat: 00 - 10  = Exposition Faible
+    Résultat: 11 - 30  = Exposition Moyenne
+    Résultat: 31 - 100 = Exposition Forte
+
+
+************************* II - Niveau de risques liés aux antécédants *******************************
+    1) Êtes vous diabétique ==> 35
+    2) Êtes vous hypertendus ==> 35
+    3) Êtes vous en surpoids ==> 30
+
+    Résultat: 0 - 30   = Risque Faible
+    Résultat: 31 - 65  = Risque Fort
+    Résultat: 66 - 100 = Risque Extrême
+
+
+
+***************************************** MATRICE DE DIAGNOSTIQUE ****************************************
+
+(Exposition, Risque)
+
+
+(Faible,Faible) = Conseiller sur les bonnes pratiques
+(Faible,Fort) = Conseiller sur les bonnes pratiques, offir des Kits
+(Faible, Extrême) = Conseiller sur les bonnes pratiques, enregistrer comme vulnérable
+(Moyenne, Faible) = Quarantaine à domicile, offir des Kits et vérifier les Symptômes
+(Moyenne, Fort) = Quarantaine à domicile, offir des Kits et vérifier les symptômes
+(Moyenne, Extrême) = Quarantaine à domicile, vérifier les symptômes avec SAD
+(Forte, Faible) = Quarantaine dans un centre de prise en charge et vérifier symptômes
+(Forte, Fort) = Quarantaine dans un centre spécialisé et vérifier les symptômes
+(Forte, Extrême) = Quarantaine dans un centre spécialisé avec suivi particulier et vérifier les symptômes
