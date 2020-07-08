@@ -3,8 +3,12 @@
 
 # Welcome into the CoronaDiagnos App
 
+import sys
 import datetime
 import time
+import os
+import keyboard
+
 
 #Declaration & instanciation des variables à utiliser
 varCivilite = "Mme/Mle/Mr"
@@ -27,6 +31,7 @@ def headerTitle():
     print("\n")
     
 
+
 def introAnalya():
     time.sleep(6)
     print("\tJe suis Analya, une Intelligence Artificielle,")
@@ -34,13 +39,14 @@ def introAnalya():
     print("\tqui vous assistera pour votre diagnostique.")
     print("\n")
     time.sleep(4)
-    print("\tMaintenant que vous savez qui je suis, loll,")
+    print("\tMaintenant que vous savez qui je suis, hahaha,")
     time.sleep(5)
     print("\tje vais vous aider à vous présenter, Ok?")
     print("\n")
     time.sleep(3)
     print("\tAllez, on y va!")
     print("\n")
+
 
 def salutation():
     time.sleep(5)
@@ -51,7 +57,25 @@ def salutation():
     print("\n")
 
 
-headerTitle()
+def startAnalya():
+    os.system('cls')
+    headerTitle()
+    introAnalya()
+    salutation()
+    
 
-introAnalya()
-salutation()
+def quitterAnalya():
+    time.sleep(4)
+    print("\n")
+    print("\tAppuyez sur Q pour quitter ou une autre touche pour continuer: ")
+    if keyboard.read_key() == "q":
+        sys.exit()
+    else:
+       startAnalya()
+       quitterAnalya()
+
+
+
+## Starting Point
+startAnalya()
+quitterAnalya()
