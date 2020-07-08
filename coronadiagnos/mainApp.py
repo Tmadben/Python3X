@@ -41,7 +41,7 @@ def introAnalya():
     print("\tqui vous assistera pour votre diagnostique.")
     print("\n")
     time.sleep(3)
-    print("\tMaintenant que vous savez qui je suis, hahaha,")
+    print("\tMaintenant que vous savez qui je suis, LOOLLLL")
     time.sleep(3)
     print("\tje vais vous aider à vous présenter, Ok?")
     print("\n")
@@ -50,32 +50,17 @@ def introAnalya():
     time.sleep(2)
     print("\n")
     print("\n")
-    
 
-# Présentez-vous: Votre Identifiant
-def infoIdentitifiant():
-    global varNumIdentifiant
-    print("\tIndiquez votre N° et appuyez sur la touche ENTREE")
-    varNumIdentifiant = input("\tVotre N° Indentifiant: ")
-    print("\n")
-    if(varNumIdentifiant.replace(" ","") != ""):
-        print("\tReponse : " + varNumIdentifiant)
-    else:
-        print("\tLe champs est vide, voyons... Allez on recommence")
-        print("\n")
-        time.sleep(4)
-        headerTitle()
-        infoIdentitifiant()
 
 # Présentez-vous: Votre Identifiant
 def infoAge():
     global varAge
     print("\tIndiquez votre Age et appuyez sur la touche ENTREE")
     ageValue = input("\tVotre Age : ").replace(" ","")
-    print("\n")
-    if(ageValue.isnumeric == True):
-        varAge = ageValue
-        print("\tReponse : " + varAge + " ans")
+    if(ageValue.isnumeric ):
+        varAge = int(ageValue)
+        print("\tReponse : " + str(varAge) + " ans")
+        print("\n")
     else:
         print("\tOh! Mais non, ce n'est pas un nombre ça!")
         time.sleep(2)
@@ -84,6 +69,23 @@ def infoAge():
         time.sleep(4)
         headerTitle()
         infoAge()
+
+
+# Présentez-vous: Votre Identifiant
+def infoIdentitifiant():
+    global varNumIdentifiant
+    print("\tIndiquez votre N° et appuyez sur la touche ENTREE")
+    varNumIdentifiant = input("\tVotre N° Indentifiant: ")
+    if(varNumIdentifiant.replace(" ","") != ""):
+        print("\tReponse : " + varNumIdentifiant)
+        print("\n")
+        infoAge()
+    else:
+        print("\tLe champs est vide, voyons... Allez on recommence")
+        print("\n")
+        time.sleep(4)
+        headerTitle()
+        infoIdentitifiant()
 
 
 # Présentez-vous: Votre Civilité
@@ -95,6 +97,7 @@ def infoCivilite():
     print("\n")
     time.sleep(4)
     print("\tCivilité: ")
+    print("\n")
     print("\t(a) : Mlle")
     print("\t(z) : Mme")
     print("\t(e) : Mr")
