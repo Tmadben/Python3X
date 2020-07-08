@@ -27,9 +27,9 @@
 (Faible,Faible) = Conseiller sur les bonnes pratiques
 (Faible,Fort) = Conseiller sur les bonnes pratiques, offir des Kits
 (Faible, Extrême) = Conseiller sur les bonnes pratiques, enregistrer comme vulnérable
-(Moyenne, Faible) = Quarantaine à domicile, offir des Kits et vérifier les Symptômes
-(Moyenne, Fort) = Quarantaine à domicile, offir des Kits et vérifier les symptômes
-(Moyenne, Extrême) = Quarantaine à domicile, vérifier les symptômes avec SAD
-(Forte, Faible) = Quarantaine dans un centre de prise en charge et vérifier symptômes
-(Forte, Fort) = Quarantaine dans un centre spécialisé et vérifier les symptômes
-(Forte, Extrême) = Quarantaine dans un centre spécialisé avec suivi particulier et vérifier les symptômes
+(Moyenne, Faible) = Quarantaine à domicile, offir des Kits et TEST COVID-19
+(Moyenne, Fort) = Quarantaine à domicile, offir des Kits et TEST COVID-19
+(Moyenne, Extrême) = Quarantaine à domicile et TEST COVID-19 avec SAD
+(Forte, Faible) = Quarantaine dans un centre de prise en charge et TEST COVID-19
+(Forte, Fort) = Quarantaine dans un centre spécialisé et TEST COVID-19
+(Forte, Extrême) = Quarantaine dans un centre spécialisé avec suivi particulier et TEST COVID-19
