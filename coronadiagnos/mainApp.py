@@ -52,7 +52,7 @@ def introAnalya():
     print("\n")
     
 
-# Présentez-vous: Votre Nom Prenom et Age
+# Présentez-vous: Votre Identifiant
 def infoIdentitifiant():
     global varNumIdentifiant
     print("\tIndiquez votre N° et appuyez sur la touche ENTREE")
@@ -63,11 +63,27 @@ def infoIdentitifiant():
     else:
         print("\tLe champs est vide, voyons... Allez on recommence")
         print("\n")
-        time.sleep(5)
+        time.sleep(4)
         headerTitle()
         infoIdentitifiant()
 
-
+# Présentez-vous: Votre Identifiant
+def infoAge():
+    global varAge
+    print("\tIndiquez votre Age et appuyez sur la touche ENTREE")
+    ageValue = input("\tVotre Age : ").replace(" ","")
+    print("\n")
+    if(ageValue.isnumeric == True):
+        varAge = ageValue
+        print("\tReponse : " + varAge + " ans")
+    else:
+        print("\tOh! Mais non, ce n'est pas un nombre ça!")
+        time.sleep(2)
+        print("\t... Allez on recommence")
+        print("\n")
+        time.sleep(4)
+        headerTitle()
+        infoAge()
 
 
 # Présentez-vous: Votre Civilité
@@ -107,6 +123,7 @@ def infoCivilite():
         time.sleep(3)
         infoCivilite()
 
+
 # Analya vous salue
 def salutation():
     print("\n")
@@ -116,7 +133,21 @@ def salutation():
         print("\tBonsoir " + varCivilite + " " + varNumIdentifiant)
     else:
         print("\tBonjour " + varCivilite + " " + varNumIdentifiant)
+    time.sleep(2)
     print("\n")
+    if (varAge < 21):
+        print("\tVous n'êtes pas encore majeur, à ce que je vois!")
+    elif (varAge < 40):
+        print("\tVous êtes à l'entrée de l'age adulte, formidable ça!")
+    elif (varAge < 50):
+        print("\tAh oui, l'age de la maturité...")
+    elif (varAge < 60):
+        print("\tJ'ai un profond respect pour les cinquantenaires vous savez.")
+    else:
+        print("\tVous avez bien fait de venir vous faire diagnostiquer.")
+    time.sleep(2)
+    print("\n")
+
 
 
 #Analya est mis en marche
