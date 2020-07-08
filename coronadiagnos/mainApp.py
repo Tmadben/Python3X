@@ -1,8 +1,9 @@
-# CoronaDiagnos is a terminal application for COVID-19 screening
-#  
+### CoronaDiagnos is a terminal 
+### application for COVID-19 screening
+### Welcome into the CoronaDiagnos App
 
-# Welcome into the CoronaDiagnos App
 
+# Importation des bibliothèques
 import sys
 import datetime
 import time
@@ -17,6 +18,7 @@ varPrenom = ""
 varAge = ""
 now = datetime.datetime.now()
 
+#Entete de l'application
 def headerTitle():
     print("\n")
     print("\t***********************************************")
@@ -31,7 +33,7 @@ def headerTitle():
     print("\n")
     
 
-
+# Analya se présente
 def introAnalya():
     time.sleep(6)
     print("\tJe suis Analya, une Intelligence Artificielle,")
@@ -48,6 +50,7 @@ def introAnalya():
     print("\n")
 
 
+# Analya vous salue
 def salutation():
     time.sleep(5)
     if(int(now.hour) > 10):
@@ -57,13 +60,14 @@ def salutation():
     print("\n")
 
 
+#Analya est mis en marche
 def startAnalya():
     os.system('cls')
     headerTitle()
     introAnalya()
     salutation()
     
-
+# Pour quitter Analya ou rester
 def quitterAnalya():
     time.sleep(4)
     print("\n")
