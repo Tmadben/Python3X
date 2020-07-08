@@ -57,10 +57,9 @@ def infoAge():
     global varAge
     print("\tIndiquez votre Age et appuyez sur la touche ENTREE")
     ageValue = input("\tVotre Age : ").replace(" ","")
-    if(ageValue.isnumeric ):
+    if(ageValue.isnumeric()):
         varAge = int(ageValue)
         print("\tReponse : " + str(varAge) + " ans")
-        print("\n")
     else:
         print("\tOh! Mais non, ce n'est pas un nombre ça!")
         time.sleep(2)
@@ -96,12 +95,11 @@ def infoCivilite():
     print("\tAppuyez sur la touche qui vous correspond")
     print("\n")
     time.sleep(4)
-    print("\tCivilité: ")
-    print("\n")
+    print("\tCivilité : ")
+    print("\t---------")
     print("\t(a) : Mlle")
     print("\t(z) : Mme")
     print("\t(e) : Mr")
-    print("\n")
     if keyboard.read_key() == "a":
         varCivilite = "Mlle"
         print("\tReponse: " + varCivilite)
@@ -130,14 +128,12 @@ def infoCivilite():
 # Analya vous salue
 def salutation():
     print("\n")
-    print("\n")
     time.sleep(5)
     if(int(now.hour) > 16):
         print("\tBonsoir " + varCivilite + " " + varNumIdentifiant)
     else:
         print("\tBonjour " + varCivilite + " " + varNumIdentifiant)
-    time.sleep(2)
-    print("\n")
+    time.sleep(3)
     if (varAge < 21):
         print("\tVous n'êtes pas encore majeur, à ce que je vois!")
     elif (varAge < 40):
