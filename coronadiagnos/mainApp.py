@@ -80,7 +80,7 @@ def screeningExposition2():
         print("\n")
         print("\tNous allons réessayer, d'accord? C'est parti")
         time.sleep(3)
-        screeningExposition1()
+        screeningExposition2()
 
 
 # Screening Expostion : (1) Avez vous été en contact avec un malade
