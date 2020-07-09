@@ -15,6 +15,7 @@ import keyboard
 varCivilite = ""
 varNumIdentifiant = ""
 varAge = ""
+varExposition = 0
 now = datetime.datetime.now()
 
 #Entete de l'application
@@ -50,6 +51,69 @@ def introAnalya():
     time.sleep(2)
     print("\n")
     print("\n")
+
+
+# Screening Expostion : (2) Avez vous été dans un pays avec plus de 1000 cas
+def screeningExposition2():
+    global varExposition
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t2) Avez vous été dans un pays avec plus de 1000 cas: ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varExposition = varExposition + 30       
+        print("\tReponse: OUI")
+        print("\n")
+        screeningExposition3()
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        print("\n")
+        screeningExposition3()
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningExposition1()
+
+
+# Screening Expostion : (1) Avez vous été en contact avec un malade
+def screeningExposition1():
+    global varExposition
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t1) Avez vous été en contact avec un malade: ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varExposition = varExposition + 60       
+        print("\tReponse: OUI")
+        print("\n")
+        screeningExposition2()
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        print("\n")
+        screeningExposition2()
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningExposition1()
+        
+
+
 
 
 # Présentez-vous: Votre Identifiant
@@ -146,7 +210,12 @@ def salutation():
         print("\tVous avez bien fait de venir vous faire diagnostiquer.")
     time.sleep(2)
     print("\n")
-
+    print("\tMaintenant que les présentations sont faites, nous allons commencer le diagnostique")
+    time.sleep(2)
+    print("\n")
+    print("\tAllez on y va!")
+    time.sleep(3)
+    screeningExposition1()
 
 
 #Analya est mis en marche
