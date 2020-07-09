@@ -120,7 +120,7 @@ def screeningRisque3():
     print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
     print("\n")
     time.sleep(4)
-    print("\t3) Êtes vous en surpoids: ")
+    print("\t6) Êtes vous en surpoids: ")
     print("\t(o) : OUI")
     print("\t(n) : NON")
     if keyboard.read_key() == "o":
@@ -158,7 +158,7 @@ def screeningRisque2():
     print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
     print("\n")
     time.sleep(4)
-    print("\t2) Êtes vous hypertendus: ")
+    print("\t5) Êtes vous hypertendus: ")
     print("\t(o) : OUI")
     print("\t(n) : NON")
     if keyboard.read_key() == "o":
@@ -188,7 +188,7 @@ def screeningRisque1():
     print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
     print("\n")
     time.sleep(4)
-    print("\t1) Êtes vous diabétique : ")
+    print("\t4) Êtes vous diabétique : ")
     print("\t(o) : OUI")
     print("\t(n) : NON")
     if keyboard.read_key() == "o":
