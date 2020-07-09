@@ -63,8 +63,8 @@ def screeningReport():
     print("\tVOS RESULTATS : ")
     print("\n")
     time.sleep(2)
-    print("\tNIVEAU d'EXPOSITION AU VIRUS: " + varDiagnosExpo)
-    print("\tNIVEAU de RISQUE LIE AUX ANTECEDANTS: " + varDiagnosRisq)
+    print("\tEXPOSITION AU VIRUS: " + varDiagnosExpo)
+    print("\tRISQUE LIE AUX ANTECEDANTS: " + varDiagnosRisq)
     print("\n")
     time.sleep(2)
     if ([varDiagnosExpo,varDiagnosRisq]==["Faible","Faible"]):
