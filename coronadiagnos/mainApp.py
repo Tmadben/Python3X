@@ -53,6 +53,36 @@ def introAnalya():
     print("\n")
 
 
+# Screening Expostion : (3) Avez vous été en contact avec quelqu'un qui a été exposé 
+def screeningExposition3():
+    global varExposition
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t3) Avez vous été en contact avec quelqu'un qui a été exposé : ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varExposition = varExposition + 10       
+        print("\tReponse: OUI")
+        time.sleep(3)
+        screeningRisque1()
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        time.sleep(3)
+        screeningRisque1()
+        
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningExposition3()
+
 # Screening Expostion : (2) Avez vous été dans un pays avec plus de 1000 cas
 def screeningExposition2():
     global varExposition
@@ -67,11 +97,11 @@ def screeningExposition2():
     if keyboard.read_key() == "o":
         varExposition = varExposition + 30       
         print("\tReponse: OUI")
-        print("\n")
+        time.sleep(3)
         screeningExposition3()
     elif keyboard.read_key() == "n":
         print("\tReponse: NON")
-        print("\n")
+        time.sleep(3)
         screeningExposition3()
     else:
         time.sleep(4)
@@ -97,11 +127,11 @@ def screeningExposition1():
     if keyboard.read_key() == "o":
         varExposition = varExposition + 60       
         print("\tReponse: OUI")
-        print("\n")
+        time.sleep(3)
         screeningExposition2()
     elif keyboard.read_key() == "n":
         print("\tReponse: NON")
-        print("\n")
+        time.sleep(3)
         screeningExposition2()
     else:
         time.sleep(4)
