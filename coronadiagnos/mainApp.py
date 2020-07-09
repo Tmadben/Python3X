@@ -17,6 +17,8 @@ varNumIdentifiant = ""
 varAge = ""
 varExposition = 0
 varRisque = 0
+varDiagnosExpo = ""
+varDiagnosRisq = ""
 now = datetime.datetime.now()
 
 #Entete de l'application
@@ -54,6 +56,62 @@ def introAnalya():
     print("\n")
 
 
+
+# Rapport après analyse
+def screeningReport():
+    headerTitle()
+    print("\tVOS RESULTATS : ")
+    print("\n")
+    time.sleep(2)
+    print("\tNIVEAU d'EXPOSITION AU VIRUS: " + varDiagnosExpo)
+    print("\tNIVEAU de RISQUE LIE AUX ANTECEDANTS: " + varDiagnosRisq)
+    print("\n")
+    time.sleep(2)
+    if ([varDiagnosExpo,varDiagnosRisq]==["Faible","Faible"]):
+        print("\tDoit recevoir des Conseils sur les bonnes pratiques")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Faible","Fort"]):
+        print("\tDoit recevoir des Conseils sur les bonnes pratiques ainsi que des Kits")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Faible","Extrême"]):
+        print("\tDoit recevoir des Conseils sur les bonnes pratiques et être enregistré comme vulnérable")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Moyenne","Faible"]):
+        print("\tDoit être mis en Quarantaine à domicile, recevoir des Kits et testé au COVID-19")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Moyenne","Fort"]):
+        print("\tDoit être mis en Quarantaine à domicile, recevoir des Kits et testé au COVID-19")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Moyenne","Extrême"]):
+        print("\tDoit être mis en Quarantaine à domicile, testé au COVID-19 avec SAD")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Forte","Faible"]):
+        print("\tDoit être mis en Quarantaine dans un centre de prise en charge et testé au COVID-19")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Forte","Fort"]):
+        print("\tDoit être mis en Quarantaine dans un centre spécialisé et testé au COVID-19")
+    elif ([varDiagnosExpo,varDiagnosRisq]==["Forte","Extrême"]):
+        print("\tDoit être mis en Quarantaine dans un centre spécialisé avec suivi particulier et testé au COVID-19 avec SAD")
+
+
+# Screening Analysis
+def screeningAnalysis():
+    global varDiagnosExpo
+    global varDiagnosRisq
+    
+    # Evaluation Risque 
+    if( varRisque < 31):
+        varDiagnosRisq = "Faible"
+    elif (varRisque < 66):
+        varDiagnosRisq = "Fort"
+    else:
+        varDiagnosRisq = "Extrême"
+
+    # Evaluation Exposistion 
+    if( varExposition < 11):
+        varDiagnosExpo = "Faible"
+    elif (varExposition < 31):
+        varDiagnosExpo = "Moyenne"
+    else:
+        varDiagnosExpo = "Forte"
+
+    # Rapport après analyse
+    screeningReport()
+
+
 # Screening Risque : (3) Êtes vous en surpoids
 def screeningRisque3():
     global varRisque
@@ -66,14 +124,22 @@ def screeningRisque3():
     print("\t(o) : OUI")
     print("\t(n) : NON")
     if keyboard.read_key() == "o":
-        varRisque = varRisque + 35       
+        varRisque = varRisque + 30       
         print("\tReponse: OUI")
-        time.sleep(3)
-        
+        print("\n\n")
+        print("\tMerci pour votre collaboration " + varCivilite + ".")
+        time.sleep(2)
+        print("\tVeuillez patienter le temps que j'analyse vos différentes réponses")
+        time.sleep(4)
+        screeningAnalysis()
     elif keyboard.read_key() == "n":
         print("\tReponse: NON")
-        time.sleep(3)
-        
+        print("\n\n")
+        print("\tMerci pour votre collaboration " + varCivilite + ".")
+        time.sleep(2)
+        print("\tVeuillez patienter le temps que j'analyse vos différentes réponses")
+        time.sleep(4)
+        screeningAnalysis()
     else:
         time.sleep(4)
         print("\tOups! Votre choix semble ne pas exister")
@@ -351,6 +417,7 @@ def startAnalya():
 def quitterAnalya():
     time.sleep(4)
     print("\n")
+    print("\n")
     print("\tAppuyez sur Q pour quitter ou une autre touche pour continuer: ")
     if keyboard.read_key() == "q":
         sys.exit()
@@ -359,7 +426,27 @@ def quitterAnalya():
        quitterAnalya()
 
 
+# Re initialiser
+def ressetAll():
+    global varRisque
+    global varExposition
+    global varCivilite
+    global varAge
+    global varDiagnosExpo
+    global varDiagnosRisq
+    global varNumIdentifiant
+
+    varCivilite = ""
+    varNumIdentifiant = ""
+    varAge = ""
+    varExposition = 0
+    varRisque = 0
+    varDiagnosExpo = ""
+    varDiagnosRisq = ""
+
+
 
 ## Starting Point
 startAnalya()
+ressetAll()
 quitterAnalya()
