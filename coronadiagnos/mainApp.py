@@ -16,6 +16,7 @@ varCivilite = ""
 varNumIdentifiant = ""
 varAge = ""
 varExposition = 0
+varRisque = 0
 now = datetime.datetime.now()
 
 #Entete de l'application
@@ -53,6 +54,97 @@ def introAnalya():
     print("\n")
 
 
+# Screening Risque : (3) Êtes vous en surpoids
+def screeningRisque3():
+    global varRisque
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t3) Êtes vous en surpoids: ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varRisque = varRisque + 35       
+        print("\tReponse: OUI")
+        time.sleep(3)
+        
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        time.sleep(3)
+        
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningRisque3()
+
+
+# Screening Risque : (2) Êtes vous hypertendus
+def screeningRisque2():
+    global varRisque
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t2) Êtes vous hypertendus: ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varRisque = varRisque + 35       
+        print("\tReponse: OUI")
+        time.sleep(3)
+        screeningRisque3()
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        time.sleep(3)
+        screeningRisque3() 
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningRisque2()
+
+
+# Screening Risque : (1) Êtes vous diabétique
+def screeningRisque1():
+    global varRisque
+    headerTitle()
+    time.sleep(3)
+    print("\tAppuyez sur la touche 'o' pour 'OUI' et 'n' pour 'NON'")
+    print("\n")
+    time.sleep(4)
+    print("\t1) Êtes vous diabétique : ")
+    print("\t(o) : OUI")
+    print("\t(n) : NON")
+    if keyboard.read_key() == "o":
+        varRisque = varRisque + 35       
+        print("\tReponse: OUI")
+        time.sleep(3)
+        screeningRisque2()
+    elif keyboard.read_key() == "n":
+        print("\tReponse: NON")
+        time.sleep(3)
+        screeningRisque2() 
+    else:
+        time.sleep(4)
+        print("\tOups! Votre choix semble ne pas exister")
+        time.sleep(2)
+        print("\n")
+        print("\tNous allons réessayer, d'accord? C'est parti")
+        time.sleep(3)
+        screeningRisque1()
+
+
+
 # Screening Expostion : (3) Avez vous été en contact avec quelqu'un qui a été exposé 
 def screeningExposition3():
     global varExposition
@@ -72,8 +164,7 @@ def screeningExposition3():
     elif keyboard.read_key() == "n":
         print("\tReponse: NON")
         time.sleep(3)
-        screeningRisque1()
-        
+        screeningRisque1() 
     else:
         time.sleep(4)
         print("\tOups! Votre choix semble ne pas exister")
@@ -82,6 +173,7 @@ def screeningExposition3():
         print("\tNous allons réessayer, d'accord? C'est parti")
         time.sleep(3)
         screeningExposition3()
+
 
 # Screening Expostion : (2) Avez vous été dans un pays avec plus de 1000 cas
 def screeningExposition2():
